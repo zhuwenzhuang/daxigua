@@ -1155,7 +1155,16 @@ window.__require = function e(t, n, o) {
                 }, t.prototype.createOneFruit = function(e) {
                     var t = this,
                         n = cc.instantiate(this.fruitPre);
-                    n.parent = this.lineNode, n.getComponent(cc.Sprite).spriteFrame = d.default.Instance.fruit[e], n.children[0].getComponent(cc.Sprite).spriteFrame = d.default.Instance.fruit[e], n.getComponent("fruitData").fruitNumber = e, n.position = this.lineNode.children[1].position, n.scale = 0, n.getComponent(cc.RigidBody).type = cc.RigidBodyType.Static, n.getComponent(cc.PhysicsCircleCollider).radius = 0, n.getComponent(cc.PhysicsCircleCollider).apply(), cc.tween(n).to(.5, {
+                    n.parent = this.lineNode,
+                    n.getComponent(cc.Sprite).spriteFrame = d.default.Instance.fruit[e],
+                     n.children[0].getComponent(cc.Sprite).spriteFrame = d.default.Instance.fruit[e],
+                     n.getComponent("fruitData").fruitNumber = e,
+                     n.position = this.lineNode.children[1].position,
+                     n.scale = 0,
+                     n.getComponent(cc.RigidBody).type = cc.RigidBodyType.Static,
+                     n.getComponent(cc.PhysicsCircleCollider).radius = 0,
+                     n.getComponent(cc.PhysicsCircleCollider).apply(),
+                     cc.tween(n).to(.0, {
                         scale: 1
                     }, {
                         easing: "backOut"
@@ -1530,7 +1539,7 @@ window.__require = function e(t, n, o) {
                         this.touchNum = 1;
                         var t = this.node.convertToNodeSpaceAR(e.getLocation()).x,
                             n = a.default.Instance.targetFruit.y;
-                        cc.tween(a.default.Instance.targetFruit).to(.1, {
+                        cc.tween(a.default.Instance.targetFruit).to(.0, {
                             position: cc.v2(t, n)
                         }).start()
                     }
@@ -1538,9 +1547,25 @@ window.__require = function e(t, n, o) {
                     i.default.playerTouch && null != a.default.Instance.targetFruit && (this.touchNum = 1, a.default.Instance.targetFruit.x = this.node.convertToNodeSpaceAR(e.getLocation()).x)
                 }, t.prototype.onTouchEnd = function(e) {
                     var t = this;
-                    i.default.playerTouch && null != a.default.Instance.targetFruit && 1 == this.touchNum && (this.touchNum = 0, a.default.Instance.targetFruit.getComponent(cc.PhysicsCircleCollider).radius = a.default.Instance.targetFruit.height / 2, a.default.Instance.targetFruit.getComponent(cc.PhysicsCircleCollider).apply(), a.default.Instance.targetFruit.getComponent(cc.RigidBody).type = cc.RigidBodyType.Dynamic, a.default.Instance.targetFruit.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -800), a.default.Instance.targetFruit = null, this.scheduleOnce(function() {
-                        i.default.GameUpdateCtrl && (0 == t.createFruitCount ? (a.default.Instance.createOneFruit(0), t.createFruitCount++) : 1 == t.createFruitCount ? (a.default.Instance.createOneFruit(0), t.createFruitCount++) : 2 == t.createFruitCount ? (a.default.Instance.createOneFruit(1), t.createFruitCount++) : 3 == t.createFruitCount ? (a.default.Instance.createOneFruit(2), t.createFruitCount++) : 4 == t.createFruitCount ? (a.default.Instance.createOneFruit(2), t.createFruitCount++) : 5 == t.createFruitCount ? (a.default.Instance.createOneFruit(3), t.createFruitCount++) : t.createFruitCount > 5 && (a.default.Instance.createOneFruit(s.default.RandomInteger(window.difficulty[0], window.difficulty[1])), t.createFruitCount++))
-                    }, .5))
+                    i.default.playerTouch && null != a.default.Instance.targetFruit && 1 == this.touchNum &&
+                        (this.touchNum = 0,
+                            a.default.Instance.targetFruit.getComponent(cc.PhysicsCircleCollider).radius = a.default.Instance.targetFruit.height / 2,
+                            a.default.Instance.targetFruit.getComponent(cc.PhysicsCircleCollider).apply(),
+                            a.default.Instance.targetFruit.getComponent(cc.RigidBody).type = cc.RigidBodyType.Dynamic,
+                            a.default.Instance.targetFruit.getComponent(cc.RigidBody).linearVelocity = cc.v2(0, -800000),
+                            a.default.Instance.targetFruit = null, this.scheduleOnce(function() {
+                        i.default.GameUpdateCtrl &&
+                            (0 == t.createFruitCount ?
+                                (a.default.Instance.createOneFruit(0),  t.createFruitCount++)
+                                : 1 == t.createFruitCount ? (a.default.Instance.createOneFruit(0), t.createFruitCount++)
+                                : 2 == t.createFruitCount ? (a.default.Instance.createOneFruit(1), t.createFruitCount++)
+                                : 3 == t.createFruitCount ? (a.default.Instance.createOneFruit(2), t.createFruitCount++)
+                                : 4 == t.createFruitCount ? (a.default.Instance.createOneFruit(2), t.createFruitCount++)
+                                : 5 == t.createFruitCount ? (a.default.Instance.createOneFruit(3), t.createFruitCount++)
+                                : t.createFruitCount > 5 &&
+                                    (a.default.Instance.createOneFruit(s.default.RandomInteger(window.difficulty[0], window.difficulty[1])),
+                                        t.createFruitCount++))
+                    }, .0))
                 }, t.prototype.closeTouch = function() {
                     this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this), this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this), this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this), this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchEnd, this)
                 }, t.prototype.addScore = function() {
@@ -3363,7 +3388,12 @@ window.__require = function e(t, n, o) {
                         t.node.parent = cc.find("Canvas/fruitNode"), i.default.Instance.fruitHeigth = i.default.Instance.findHighestFruit(), null != t.node.getComponent(cc.RigidBody) && (t.node.getComponent(cc.RigidBody).angularVelocity = 0);
                         var c = this.fruitNumber,
                             r = n.node.getComponent("fruitData").fruitNumber;
-                        c == r && c < 9 && r < 9 ? (this.pengzhuangCount += 1, 0 == t.node.getComponent("fruitData").getNumber() && (a.default.score += this.fruitNumber + (1 * multiplescore), u.default.Instance.SetScoreTween(a.default.score), n.node.getComponent(cc.PhysicsCircleCollider).radius = 0, n.node.getComponent(cc.PhysicsCircleCollider).apply(), this.node.getComponent(cc.PhysicsCircleCollider).radius = 0, this.node.getComponent(cc.PhysicsCircleCollider).apply(), cc.tween(t.node).to(.1, {
+                        c == r && c < 9 && r < 9 ? (this.pengzhuangCount += 1, 0 == t.node.getComponent("fruitData").getNumber() &&
+                        (a.default.score += this.fruitNumber + (1 * multiplescore), u.default.Instance.SetScoreTween(a.default.score),
+                         n.node.getComponent(cc.PhysicsCircleCollider).radius = 0,
+                         n.node.getComponent(cc.PhysicsCircleCollider).apply(),
+                         this.node.getComponent(cc.PhysicsCircleCollider).radius = 0,
+                         this.node.getComponent(cc.PhysicsCircleCollider).apply(), cc.tween(t.node).to(.0, {
                             position: n.node.position
                         }).call(function() {
                             i.default.Instance.createFruitSui(o.fruitNumber, n.node.position), i.default.Instance.createFruitL(o.fruitNumber, n.node.position, n.node.width), i.default.Instance.createLevelUpFruit(o.fruitNumber + 1, n.node.position), n.node.active = !1, t.node.active = !1, n.node.destroy(), t.node.destroy()
